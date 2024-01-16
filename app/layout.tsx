@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main className='flex flex-col lg:flex-row justify-end min-h-screen'>
+        <main className='flex flex-col lg:flex-row justify-end min-h-screen'> 
           <section 
             className='lg:fixed lg:left-0 flex flex-col justify-center lg:w-[31%] lg:h-screen mt-[50px] lg:mt-[0px] mb-[20px] lg:mb-[0px]'> 
             <Banner/>
