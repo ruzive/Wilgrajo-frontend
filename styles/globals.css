@@ -49,9 +49,17 @@ body {
 }
 
 .container{
-  background-color:green;
+  background-color:transparent 80%;
+  padding-right: 15px;
   margin: auto;
-  padding-bottom: 5px;
-  padding-top: 5px;
-  justify-content: space-between;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content:right;
+}
+
+.links{
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }

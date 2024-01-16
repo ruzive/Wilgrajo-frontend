@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { NavLink } from "../navLink/NavLink"
 
 
 export const Links = () => {
@@ -21,8 +22,8 @@ export const Links = () => {
     }
   ]
   return (
-    <div>{links.map((link=>(
-      <Link href={link.path} key={link.title}>{link.title}</Link>
+    <div className="links">{links.map((link=>(
+      <NavLink item={link} key={link.title}/>
     )))}</div>
   )
 }

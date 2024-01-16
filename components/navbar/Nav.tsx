@@ -2,7 +2,7 @@ import { Links } from "./Links/Links"
 
 const Nav = () => {
   return (
-    <div className="container">
+    <div className="container ">
       <Links/>
     </div>
   )
