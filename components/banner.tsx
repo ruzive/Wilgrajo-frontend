@@ -10,8 +10,8 @@ const Banner = () => {
         <Image 
             src={image}
             alt="Wilgrajo Logo"
-            width={280}
-            height={80}
+            width={380}
+            height={120}
             priority/>
         </div>
         <div className="text-[50px] mt-[15px]">
