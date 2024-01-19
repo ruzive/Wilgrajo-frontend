@@ -1,4 +1,6 @@
-import { Links } from "./Links/Links"
+// import Links from "./Links/Links"
+
+import Links from "./Links/Links"
 
 const Nav = () => {
   return (
