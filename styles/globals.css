@@ -69,3 +69,27 @@ body {
   cursor: pointer;
   font-weight: bold;
 }
+
+.container_contact{
+  background-color:transparent 80%;
+  padding-right: 25px;
+  padding-left: 15px;
+  border-radius: 5%;
+  margin: auto;
+  height: 40%;
+  width: 90%;
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .container_contact {
+  height: 150px;
+  width: 90%;
+  }
+  }
+  @media (max-width: 480px) {
+  .container_contact {
+  height: 100px;
+  width: 90%;
+  }
+  }
