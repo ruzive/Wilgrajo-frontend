@@ -1,4 +1,9 @@
 import Link from "next/link";
+import { FaMapSigns } from "react-icons/fa";
+import { GiPathDistance } from "react-icons/gi";
+import { MdRoomPreferences } from "react-icons/md";
+import { ImPriceTags } from "react-icons/im";
+
 
 
 const Cards = () => {
@@ -17,15 +22,29 @@ const Cards = () => {
           alt="Hollywood Sign on The Hill" />
 
       <div className="p-6">
-        <h5
-          className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-          Card title
-        </h5>
-        <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-          This is a longer card with supporting text below as a natural
-          lead-in to additional content. This content is a little bit
-          longer.
-        </p>
+      <h3 className='text-[20px] font-bold mt-[10px]'>
+                  propertyName
+                </h3>
+                <p className='flex mb-[10px]'>
+                <FaMapSigns />
+                  <span>Location</span>
+                </p>
+                <ul className='flex flex-col'>
+                  <li className='flex justify-between py-[1px]'>
+                    <GiPathDistance/>Distance
+                    <span>distance</span>
+                  </li>
+                  <li className='flex justify-between py-[1px]'>
+                    <MdRoomPreferences/>
+                    Rooms
+                    <span>rooms</span>
+                  </li>
+                  <li className='flex justify-between text-[22px] font-bold py-[1px]'>
+                    <ImPriceTags/>
+                    Rent
+                    <span className='text-black-600'>ZMW rent</span>
+                  </li>
+                </ul>
       </div>
     </div>
     </Link>
@@ -41,15 +60,29 @@ const Cards = () => {
           alt="Palm Springs Road" />
  
       <div className="p-6">
-        <h5
-          className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-          Card title
-        </h5>
-        <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-          This is a longer card with supporting text below as a natural
-          lead-in to additional content. This content is a little bit
-          longer.
-        </p>
+      <h3 className='text-[20px] font-bold mt-[10px]'>
+                  propertyName
+                </h3>
+                <p className='flex mb-[10px]'>
+                <FaMapSigns />
+                  <span>Location</span>
+                </p>
+                <ul className='flex flex-col'>
+                  <li className='flex justify-between py-[1px]'>
+                    <GiPathDistance/>Distance
+                    <span>distance</span>
+                  </li>
+                  <li className='flex justify-between py-[1px]'>
+                    <MdRoomPreferences/>
+                    Rooms
+                    <span>rooms</span>
+                  </li>
+                  <li className='flex justify-between text-[22px] font-bold py-[1px]'>
+                    <ImPriceTags/>
+                    Rent
+                    <span className='text-black-600'>ZMW rent</span>
+                  </li>
+                </ul>
       </div>
     </div>
     </Link>
@@ -65,14 +98,29 @@ const Cards = () => {
           alt="Skyscrapers" />
 
       <div className="p-6">
-        <h5
-          className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-          Card title
-        </h5>
-        <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-          This is a longer card with supporting text below as a natural
-          lead-in to additional content.
-        </p>
+      <h3 className='text-[20px] font-bold mt-[10px]'>
+                  propertyName
+                </h3>
+                <p className='flex mb-[10px]'>
+                <FaMapSigns />
+                  <span>Location</span>
+                </p>
+                <ul className='flex flex-col'>
+                  <li className='flex justify-between py-[1px]'>
+                    <GiPathDistance/>Distance
+                    <span>distance</span>
+                  </li>
+                  <li className='flex justify-between py-[1px]'>
+                    <MdRoomPreferences/>
+                    Rooms
+                    <span>rooms</span>
+                  </li>
+                  <li className='flex justify-between text-[22px] font-bold py-[1px]'>
+                    <ImPriceTags/>
+                    Rent
+                    <span className='text-black-600'>ZMW rent</span>
+                  </li>
+                </ul>
       </div>
     </div>
     </Link>
@@ -88,15 +136,28 @@ const Cards = () => {
           alt="Los Angeles Skyscrapers" />
  
       <div className="p-6">
-        <h5
-          className="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-          Card title
-        </h5>
-        <p className="mb-4 text-base text-neutral-600 dark:text-neutral-200">
-          This is a longer card with supporting text below as a natural
-          lead-in to additional content. This content is a little bit
-          longer.
-        </p>
+      <h3 className='text-[20px] font-bold mt-[10px]'>
+                  propertyName
+                </h3>
+                <p className='flex mb-[10px]'>
+                <FaMapSigns />
+                  :Location
+                </p>
+                <ul className='flex flex-col'>
+                  <li className='flex flex-start py-[1px]'>
+                    <GiPathDistance/>Distance
+                    :distance
+                  </li>
+                  <li className='flex flex-start py-[1px]'>
+                    <MdRoomPreferences/>
+                    Rooms
+                    :rooms
+                  </li>
+                  <li className='flex justify-between text-[22px] font-bold py-[1px]'>
+                  <span className="flex-start"><ImPriceTags/></span>
+                    <span className='text-black-600'>ZMW rent</span>
+                  </li>
+                </ul>
       </div>
     </div>
     </Link>
