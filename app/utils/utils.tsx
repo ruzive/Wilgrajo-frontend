@@ -1,22 +1,6 @@
-
-export interface ResponseData {
-    status: string;
-    data: Data;
-    msg: string;
-}
-
-export interface Data {
-    count: number;
-    next: string | null;
-    previous: string | null;
-    results: Result[];
-}
-
-export interface Result {
+export interface Photo {
     id: number;
-    photos: any[]; // Assuming photos can be of any type
-    city: City;
-    neighborhood: Neighborhood;
+    image: string[];
     uuid: string;
     created: string;
     modified: string;
@@ -25,26 +9,59 @@ export interface Result {
     status: number;
     activate_date: string;
     deactivate_date: string | null;
+    order: number;
+    property: number;
+  }
+  
+  export interface City {
+    id: number;
+    title: string;
+  }
+  
+  export interface Neighborhood {
+    id: number;
+    title: string;
+    city: City;
+  }
+  
+  export interface Result {
+    id: number;
+    photos: Photo[];
+    city: City;
+    neighborhood: Neighborhood;
+    uuid: string;
+    property_type: string;
+    created: string;
+    modified: string;
+    title: string;
+    description: string | null;
+    status: number;
+    activate_date: string;
+    deactivate_date: string | null;
     featured: boolean;
-    num_record: number | null;
+    num_record: null;
     intent: string;
     obs: string;
     price: string;
     conditions: string;
     user: number;
-}
-
-
-export interface City {
-    id: number;
-    title: string;
-}
-
-export interface Neighborhood {
-    id: number;
-    title: string;
-    city: City;
-}
+  }
+  
+  export interface Data {
+    count: number;
+    next: null;
+    previous: null;
+    results: Result[];
+  }
+  
+  export interface ResponseData {
+    data: {
+      status: string;
+      data: Data;
+    };
+    msg: string;
+  }
+  
 
 
 
@@ -78,7 +95,7 @@ export default async function Page() {
         } else {
             // Access nested properties if they exist
             console.log('Status:', responseData.data.status);
-            console.log('Message:', responseData.data.msg);
+            console.log('Message:', responseData.msg);
             console.log('Data:', responseData.data.data); // Make sure this is the correct path to data
         }
 
