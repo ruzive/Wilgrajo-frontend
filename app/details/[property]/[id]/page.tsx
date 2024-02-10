@@ -1,5 +1,6 @@
-import { useState } from 'react'
+'use client'
 import Link from 'next/link'
+import { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai'
 import { HiOutlineMapPin } from 'react-icons/hi2'
 import { MdOutlineCall, MdOutlineFastfood, MdWaterDrop } from 'react-icons/md'
@@ -17,15 +18,22 @@ import { BsFillPersonFill, BsWifi, BsHouseDoor, BsCurrencyDollar, BsClock, BsCas
 //     property: PropertyType,
 //   }
 
-const PropertyDetails = () => {
-
-    // const [slider, setSlider] = useState<boolean>(false);
-
-    // const handleSlider = () => {
-    //     slider 
-    //         ? setSlider(false)
-    //         : setSlider(true);
-    // }
+const PropertyDetails = ({params}:{params:{ property:string, id: string}}) => {
+    const [results, setResults] = useState<Result[]>([]);
+    const [error, setError] = useState<string | null>(null);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const responseData: Result[]| undefined = await Page();
+          setResults(responseData!);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+          setError('Error fetching data. Please try again later.'); // Set error message
+        }
+      };
+      fetchData();
+    }, []);
 
   return (
         <div className='relative flex flex-col md:flex-row w-full'>
@@ -46,7 +54,7 @@ const PropertyDetails = () => {
                     <ul className='flex flex-col'>
                         <li className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
                             <p className='text-lg font-bold border-b border-neutral-400/60 pb-1.5 mb-5'>
-                                Property Details
+                                Property Details for { params.property.toUpperCase()} ID {params.id }
                             </p>
                             <div className='flex flex-wrap'>
                                 <div className='flex items-center px-4 py-2 w-[240px]'>

@@ -46,7 +46,7 @@ const PropertyDetails = () => {
                     <ul className='flex flex-col'>
                         <li className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
                             <p className='text-lg font-bold border-b border-neutral-400/60 pb-1.5 mb-5'>
-                                Property Details
+                                Property Details for {}
                             </p>
                             <div className='flex flex-wrap'>
                                 <div className='flex items-center px-4 py-2 w-[240px]'>
