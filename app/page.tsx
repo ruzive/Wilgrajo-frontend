@@ -1,30 +1,34 @@
 'use client'
 import { useEffect, useState } from 'react';
 import Cards from "@components/Cards";
-import Page from './utils/utils';
+import {Page} from './utils/utils';
 import {Result} from './utils/utils';
 
 
 export default function Home() {
   const [results, setResults] = useState<Result[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseData: Result[] = await Page();
-        setResults(responseData);
-        // console.log("from page.tsx:");
-        // responseData.forEach((item, index) => {
-        //   console.log(`Object ${index + 1}:`, item);
-        // });
+        const responseData: Result[]| undefined = await Page();
+        setResults(responseData!);
       } catch (error) {
         console.error('Error fetching data:', error);
+        setError('Error fetching data. Please try again later.'); // Set error message
       }
     };
     fetchData();
   }, []);
   return (
-    <Cards results={results} />
+    <div>
+    {error ? (
+      <div>Error: {error}</div>
+    ) : (
+      <Cards results={results} />
+    )}
+  </div>
     
   )
 }
