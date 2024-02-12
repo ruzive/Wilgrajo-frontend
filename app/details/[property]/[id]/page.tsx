@@ -1,17 +1,20 @@
 'use client'
 import Link from 'next/link'
+import area from '@public/assets/images/area-svgrepo-com.svg'
+import desc from '@public/assets/images/description-svgrepo-com.svg'
 import { useEffect, useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai'
 import { HiOutlineMapPin } from 'react-icons/hi2'
 import { MdOutlineCall, MdOutlineFastfood, MdWaterDrop } from 'react-icons/md'
 import { FaFan, FaToilet } from 'react-icons/fa'
 import { CgSmartHomeRefrigerator } from 'react-icons/cg'
-import { GiWashingMachine, GiPathDistance, GiRotaryPhone, GiWaterGallon, GiElectric } from 'react-icons/gi'
+import { GiWashingMachine, GiRotaryPhone, GiWaterGallon, GiElectric } from 'react-icons/gi'
 import { IoIosPeople } from 'react-icons/io'
 import { IoReturnDownBack } from 'react-icons/io5'
-import { BsFillPersonFill, BsWifi, BsHouseDoor, BsCurrencyDollar, BsClock, BsCashStack } from 'react-icons/bs'
-import { fetchData, DataAttributes, Params } from '@app/utils/utils';
+import { BsFillPersonFill, BsWifi, BsHouseDoor, BsClock, BsCurrencyDollar, BsActivity, BsCashStack } from 'react-icons/bs'
+import { fetchData, DataAttributes, Params, Photo } from '@app/utils/utils';
 import Slider from '@components/Slider';
+import Image from 'next/image'
 // import Map from './Map'
 
 
@@ -41,6 +44,11 @@ import Slider from '@components/Slider';
         console.log('click')
         setSlider(!slider); // Toggle slider state
       };
+      const getRandomPhoto = (photos: Photo[]): string | undefined => {
+        if (photos.length === 0) return undefined; // Return undefined if the photos array is empty
+        const randomIndex = Math.floor(Math.random() * photos.length); // Generate a random index
+        return photos[randomIndex].image[0]; // Return the URL of the random photo
+      };
   return (
         <div className='relative flex flex-col md:flex-row w-full'>
             <section className='flex flex-col  justify-between px-[15px] sm:px-[50px] xl:px-[100px] py-[60px] md:w-[75%] w-full ' style={{ marginLeft: '-55px' }}>
@@ -51,13 +59,54 @@ import Slider from '@components/Slider';
                         </h3>
                         <p className='flex font-bold'>
                             <span><HiOutlineMapPin size={20}/></span>
-                            {results?.neighborhood.title}/{results?.city.title}
+                            {results?.neighborhood.title}/{results?.city.title} 
                         </p>
                         <p className='text-[#228B22] text-2xl mt-1.5'>
                                  <span>{Number(results?.price).toLocaleString('en-US', { style: 'currency', currency: 'ZMW' })}</span> 
                         </p>
                     </div>
-                    <ul className='flex flex-col'>
+                    {results?.property_type === "land" ?(
+                      
+                    <ul className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
+                            <p className='text-lg font-bold border-b border-neutral-400/60 pb-1.5 mb-5'>
+                                Property Details for { results?.property_type.toUpperCase()} ID {params.id }
+                            </p>
+                        <div className='flex flex-wrap'>
+                            <div className='flex items-center px-4 py-2 w-[240px]'>
+                                <div className='text-neutral-700 pr-[10px]'>
+                                   <BsActivity/>        
+                                </div>
+                                <div className=''>
+                                    <div className="text-sm font-bold text-neutral-500">
+                                        <span>Description</span>
+                                    </div>
+                                    <div className="text-md font-bold">
+                                         <span>{results?.obs}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='flex items-center px-4 py-2 w-[240px]'>
+                                <div className='text-neutral-700 pr-[10px]'>
+                                    <Image
+                                        src={area}
+                                        height={25}
+                                        width={25}
+                                        alt="area"
+                                        priority/>
+                                </div>
+                                <div className=''>
+                                    <div className="text-sm font-bold text-neutral-500">
+                                        <span>Area</span>
+                                    </div>
+                                    <div className="text-md font-bold">
+                                         <span>{results?.title}</span> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ul>
+                    ):(
+                    <ul className='flex flex-col'>  
                         <li className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
                             <p className='text-lg font-bold border-b border-neutral-400/60 pb-1.5 mb-5'>
                                 Property Details for { results?.property_type.toUpperCase()} ID {params.id }
@@ -72,8 +121,9 @@ import Slider from '@components/Slider';
                                             <span>Rooms</span>
                                         </div>
                                         <div className="text-md font-bold">
-                                            {/* <span>{property.rooms}</span> */}
+                                            {/* <span>{property.rooms}</span>  */}
                                         </div>
+
                                     </div>
                                 </div>
                                 <div className='flex items-center px-4 py-2 w-[240px]'>
@@ -307,6 +357,7 @@ import Slider from '@components/Slider';
                                 </div>
                             </div>
                         </li>
+    
                         <li className='bg-white drop-shadow-xl rounded-lg flex justify-between text-[30px] font-bold py-[10px] px-[15px] my-[10px]'>
                             {results?.intent === "rent" ? (
                                 <>
@@ -326,13 +377,17 @@ import Slider from '@components/Slider';
 
                         </li>
                     </ul>
+                    )}
                 </div>
             </section>
             <section className='md:fixed top-20 right-0 flex flex-col justify-between md:h-screen md:w-[27%] w-full drop-shadow-3xl md:drop-shadow-xl px-[15px] sm:px-[50px] md:px-0 mx-auto mb-16'>
-                <button className='relative md:min-h-[35%]' >
-                    {/* <div key={property._id} className="flex"> */}
-                        <div className="h-full w-full">
-                            {/* <img className='h-full w-full object-contain' src={property.images[0]} alt="Property Image"/> */}
+                <button className='relative md:min-h-[40%]' onClick={handleSlider} >
+                     <div key={results?.uuid} className="flex"> 
+                        <div className="relative h-full w-full">
+                             <img 
+                                className='relative h-[15%] w-full object-contain' 
+                                src={results?.photos[0].image[0]} 
+                                alt="Property Image"/>
                         </div>
                         <div className='absolute top-0 left-0 text-white text-left font-bold bg-neutral-600/50 h-full w-full p-3'>
                             <p className='text-xl'>
@@ -342,7 +397,7 @@ import Slider from '@components/Slider';
                                 Click to View in Full Screen
                             </p>
                         </div>
-                    {/* </div> */}
+                     </div> 
                 </button>
                 <div className='h-[300px] md:min-h-[60%] w-full mt-10 md:mt-0'>
                     {/* <Map property={property}/> */}
@@ -353,7 +408,7 @@ import Slider from '@components/Slider';
                     <div className='w-[80%] h-[80%]'>
                         <Slider photos={results.photos} />
                     </div>
-                    <button onClick={handleSlider}>
+                    <button className='bg-neutral-800/80 rounded-full fixed top-10 right-10 z-10 text-white p-1'  onClick={handleSlider}>
                         <AiOutlineClose size={25} />
                     </button>
                 </div>

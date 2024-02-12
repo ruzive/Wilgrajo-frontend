@@ -40,8 +40,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { DataAttributes, Photo } from '@app/utils/utils';
-import Image from 'next/image';
+import { Photo } from '@app/utils/utils'; // Assuming Photo type is defined in utils
 
 interface SliderProps {
   photos: Photo[];
@@ -65,12 +64,10 @@ const Slider = ({ photos }: SliderProps) => {
     >
       {photos.map((pic) => (
         <SwiperSlide key={pic.id} className='flex justify-center items-center min-[1200px]:px-[1px] px-[1px]'>
-          <Image
+          <img 
+            className="rounded-xl" 
             src={pic.image[0]} // Assuming the image URL is stored at index 0
             alt="property"
-            width={500} // Adjust width and height as per your design
-            height={300}
-            className="rounded-xl"
           />
         </SwiperSlide>
       ))}
