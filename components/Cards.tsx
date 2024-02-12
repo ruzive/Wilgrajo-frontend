@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaMapSigns } from "react-icons/fa";
+import { HiOutlineMapPin } from "react-icons/hi2";
 import { GiPathDistance } from "react-icons/gi";
 import { MdRoomPreferences } from "react-icons/md";
 import { ImPriceTags } from "react-icons/im";
@@ -94,7 +94,7 @@ const Cards = ({ results }: CardsProps) => {
               </h3>
 
                 <p className="flex mb-[10px]">
-                  <FaMapSigns />
+                  <HiOutlineMapPin />
                  {result.city.title}/{result.neighborhood.title}
                 </p>
                 <ul className="flex flex-col">

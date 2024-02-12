@@ -10,79 +10,59 @@ import { GiWashingMachine, GiPathDistance, GiRotaryPhone, GiWaterGallon, GiElect
 import { IoIosPeople } from 'react-icons/io'
 import { IoReturnDownBack } from 'react-icons/io5'
 import { BsFillPersonFill, BsWifi, BsHouseDoor, BsCurrencyDollar, BsClock, BsCashStack } from 'react-icons/bs'
+import { fetchData, DataAttributes, Params } from '@app/utils/utils';
+import Slider from '@components/Slider';
 // import Map from './Map'
-// import Slider from './Slider'
 
-// import { PropertyType } from '../typings'
-// interface Props {
-//     property: PropertyType,
-//   }
 
-const PropertyDetails = ({params}:{params:{ property:string, id: string}}) => {
-    const [results, setResults] = useState<Result[]>([]);
+
+  
+  const PropertyDetails = ({ params }: { params: Params }) => {
+    const [results, setResults] = useState<DataAttributes | undefined>();
     const [error, setError] = useState<string | null>(null);
+    const [slider, setSlider] = useState<boolean>(false);
   
     useEffect(() => {
-      const fetchData = async () => {
+      const getPropData = async () => {
         try {
-          const responseData: Result[]| undefined = await Page();
-          setResults(responseData!);
+          const results = await fetchData({params});
+          console.log('pages received data'+ results?.city)
+          setResults(results);
         } catch (error) {
           console.error('Error fetching data:', error);
           setError('Error fetching data. Please try again later.'); // Set error message
         }
       };
-      fetchData();
-    }, []);
-
+  
+      getPropData();
+    }, [params]);
+    
+    const handleSlider = () => {
+        console.log('click')
+        setSlider(!slider); // Toggle slider state
+      };
   return (
         <div className='relative flex flex-col md:flex-row w-full'>
             <section className='flex flex-col  justify-between px-[15px] sm:px-[50px] xl:px-[100px] py-[60px] md:w-[75%] w-full ' style={{ marginLeft: '-55px' }}>
                 <div>
                     <div className='bg-gradient-to-tr from-[#C2B9F2]/50 to-[#ACDFF2]/50 rounded-lg drop-shadow-2xl border px-5 py-10 my-[30px]'>
                         <h3 className='text-[35px] font-bold'>
-                            {/* {property.propertyName} */}
+                            {results?.property_type}
                         </h3>
                         <p className='flex font-bold'>
                             <span><HiOutlineMapPin size={20}/></span>
-                            {/* {property.location} */}
+                            {results?.neighborhood.title}/{results?.city.title}
                         </p>
                         <p className='text-[#228B22] text-2xl mt-1.5'>
-                                {/* <span>Rs.{property.rent}</span> */}
+                                 <span>{Number(results?.price).toLocaleString('en-US', { style: 'currency', currency: 'ZMW' })}</span> 
                         </p>
                     </div>
                     <ul className='flex flex-col'>
                         <li className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
                             <p className='text-lg font-bold border-b border-neutral-400/60 pb-1.5 mb-5'>
-                                Property Details for { params.property.toUpperCase()} ID {params.id }
+                                Property Details for { results?.property_type.toUpperCase()} ID {params.id }
                             </p>
                             <div className='flex flex-wrap'>
-                                <div className='flex items-center px-4 py-2 w-[240px]'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <BsFillPersonFill size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Gender</span>
-                                        </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.gender}</span> */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='flex items-center px-4 py-2 w-[240px]'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <GiPathDistance size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Distance from Campus</span>
-                                        </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.distance}</span> */}
-                                        </div>
-                                    </div>
-                                </div>
                                 <div className='flex items-center px-4 py-2 w-[240px]'>
                                     <div className='text-neutral-700 pr-[10px]'>
                                         <BsHouseDoor size={25}/>
@@ -328,10 +308,22 @@ const PropertyDetails = ({params}:{params:{ property:string, id: string}}) => {
                             </div>
                         </li>
                         <li className='bg-white drop-shadow-xl rounded-lg flex justify-between text-[30px] font-bold py-[10px] px-[15px] my-[10px]'>
-                            <span>Rent</span>
-                            <div className='text-[#228B22]'>
-                                {/* <span>Rs.{property.rent}</span> */}
-                            </div>
+                            {results?.intent === "rent" ? (
+                                <>
+                                <span >RENT</span>
+                                    <div className='text-[#228B22]'>
+                                    <span>{Number(results?.price).toLocaleString('en-US', { style: 'currency', currency: 'ZMW' })}</span> 
+                                </div>
+                                </>
+                                    ) : (
+                                        <>
+                                        <span >BUY</span>
+                                            <div className='text-[#228B22]'>
+                                            <span>{Number(results?.price).toLocaleString('en-US', { style: 'currency', currency: 'ZMW' })}</span> 
+                                        </div>
+                                        </>
+                             )}
+
                         </li>
                     </ul>
                 </div>
@@ -356,18 +348,16 @@ const PropertyDetails = ({params}:{params:{ property:string, id: string}}) => {
                     {/* <Map property={property}/> */}
                 </div>
             </section>
-            {/* {slider 
-                    ? 
-                        <div className='fixed top-0 left-0 z-10 flex justify-center items-center bg-neutral-600/70 h-screen w-full'>
-                            <div className='w-[80%] h-[80%]'>
-                                <Slider property={property}/>
-                            </div>
-                            <button className='bg-neutral-800/80 rounded-full fixed top-10 right-10 z-10 text-white p-1' onClick={handleSlider}>
-                                <AiOutlineClose size={25}/>
-                            </button>
-                        </div>
-                    : null
-            } */}
+            {slider && results && (
+                <div className='fixed top-0 left-0 z-10 flex justify-center items-center bg-neutral-600/70 h-screen w-full'>
+                    <div className='w-[80%] h-[80%]'>
+                        <Slider photos={results.photos} />
+                    </div>
+                    <button onClick={handleSlider}>
+                        <AiOutlineClose size={25} />
+                    </button>
+                </div>
+            )}
         </div>
     
     )
