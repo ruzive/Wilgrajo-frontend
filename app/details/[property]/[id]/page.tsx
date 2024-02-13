@@ -15,13 +15,13 @@ import { BsFillPersonFill, BsWifi, BsHouseDoor, BsClock, BsCurrencyDollar, BsAct
 import { fetchData, DataAttributes, Params, Photo } from '@app/utils/utils';
 import Slider from '@components/Slider';
 import Image from 'next/image'
-// import Map from './Map'
+import Map from '@components/Map'
 
 
 
   
   const PropertyDetails = ({ params }: { params: Params }) => {
-    const [results, setResults] = useState<DataAttributes | undefined>();
+    const [results, setResults] = useState<DataAttributes>();
     const [error, setError] = useState<string | null>(null);
     const [slider, setSlider] = useState<boolean>(false);
   
@@ -385,9 +385,10 @@ import Image from 'next/image'
                      <div key={results?.uuid} className="flex"> 
                         <div className="relative h-full w-full">
                              <img 
-                                className='relative h-[15%] w-full object-contain' 
+                                className='relative h-[5%] w-full' 
                                 src={results?.photos[0].image[0]} 
-                                alt="Property Image"/>
+                                alt="Property Image"
+                                />
                         </div>
                         <div className='absolute top-0 left-0 text-white text-left font-bold bg-neutral-600/50 h-full w-full p-3'>
                             <p className='text-xl'>
@@ -399,9 +400,9 @@ import Image from 'next/image'
                         </div>
                      </div> 
                 </button>
-                <div className='h-[300px] md:min-h-[60%] w-full mt-10 md:mt-0'>
-                    {/* <Map property={property}/> */}
-                </div>
+                {/* <div className='h-[300px] md:min-h-[60%] w-full mt-10 md:mt-0'>
+                     <Map property={results}/>
+                </div> */}
             </section>
             {slider && results && (
                 <div className='fixed top-0 left-0 z-10 flex justify-center items-center bg-neutral-600/70 h-screen w-full'>

@@ -1,8 +1,9 @@
+import { DataAttributes } from "@app/utils/utils";
 import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api";
 // import { PropertyType } from '../typings'
-// interface Props {
-//     property: PropertyType,
-// }
+interface Props {
+    property: DataAttributes
+}
 
 interface Location {
   lat: number,
