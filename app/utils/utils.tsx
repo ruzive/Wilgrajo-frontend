@@ -34,6 +34,8 @@ export interface Photo {
     created: string;
     modified: string;
     title: string;
+    longitude: string;
+    latitude: string;
     description: string | null;
     status: number;
     activate_date: string;
@@ -65,6 +67,8 @@ export interface Photo {
     intent: string;
     obs: string;
     price: string;
+    longitude: number;
+    latitude: number;
     conditions: string;
     address: string;
     total_bedroom: number;
