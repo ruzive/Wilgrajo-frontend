@@ -121,7 +121,13 @@ import Map from '@components/Map'
                                             <span>Rooms</span>
                                         </div>
                                         <div className="text-md font-bold">
-                                            {/* <span>{property.rooms}</span>  */}
+                                             <span>{results?.total_room}</span> 
+                                        </div>
+                                        <div className="text-sm font-bold text-neutral-500">
+                                            <span>BedRooms</span>
+                                        </div>
+                                        <div className="text-md font-bold">
+                                             <span>{results?.total_bedroom}</span> 
                                         </div>
 
                                     </div>
@@ -135,7 +141,13 @@ import Map from '@components/Map'
                                             <span>Bathrooms</span>
                                         </div>
                                         <div className="text-md font-bold">
-                                            {/* <span>{property.bathrooms}</span> */}
+                                             <span>{results?.total_bathroom}</span> 
+                                        </div>
+                                        <div className="text-sm font-bold text-neutral-500">
+                                            <span>Guest Bathrooms</span>
+                                        </div>
+                                        <div className="text-md font-bold">
+                                             <span>{results?.total_guest_wc}</span> 
                                         </div>
                                     </div>
                                 </div>
@@ -148,215 +160,178 @@ import Map from '@components/Map'
                                             <span>In-Time</span>
                                         </div>
                                         <div className="text-md font-bold">
-                                            {/* <span>{property.inTime}</span> */}
+                                             <span>{}</span> 
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <li className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
-                            <p className='text-lg font-bold border-b border-neutral-400/60 pb-1.5 mb-5'>
-                                Amenities
-                            </p>
-                            <div className='flex flex-wrap'>
-                                <div className='flex items-center px-4 py-2 w-[240px]'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <BsWifi size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Wifi</span>
+                        {results?.property_type === "apartment" ?(
+                            <>
+                                    <li className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
+                                    <p className='text-lg font-bold border-b border-neutral-400/60 pb-1.5 mb-5'>
+                                        Amenities
+                                    </p>
+                                    <div className='flex flex-wrap'>
+                                        <div className='flex items-center px-4 py-2 w-[240px]'>
+                                            <div className='text-neutral-700 pr-[10px]'>
+                                                <BsWifi size={25}/>
+                                            </div>
+                                            <div className=''>
+                                                <div className="text-sm font-bold text-neutral-500">
+                                                    <span>Wifi</span>
+                                                </div>
+                                                <div className="text-md font-bold">
+                                                    {/* <span>{property.wifi}</span> */}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.wifi}</span> */}
+                                        <div className='flex items-center px-4 py-2 w-[240px]'>
+                                            <div className='text-neutral-700 pr-[10px]'>
+                                                <CgSmartHomeRefrigerator size={25}/>
+                                            </div>
+                                            <div className=''>
+                                                <div className="text-sm font-bold text-neutral-500">
+                                                    <span>Refrigerator</span>
+                                                </div>
+                                                <div className="text-md font-bold">
+                                                    {/* <span>{property.refrigerator}</span> */}
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className='flex items-center px-4 py-2 w-[240px]'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <CgSmartHomeRefrigerator size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Refrigerator</span>
+                                        <div className='flex items-center px-4 py-2 w-[240px]'>
+                                            <div className='text-neutral-700 pr-[10px]'>
+                                                <GiWashingMachine size={25}/>
+                                            </div>
+                                            <div className=''>
+                                                <div className="text-sm font-bold text-neutral-500">
+                                                    <span>Washing Machine</span>
+                                                </div>
+                                                <div className="text-md font-bold">
+                                                    {/* <span>{property.washingMachine}</span> */}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.refrigerator}</span> */}
+                                        <div className='flex items-center px-4 py-2 w-[240px]'>
+                                            <div className='text-neutral-700 pr-[10px]'>
+                                                <FaFan size={25}/>
+                                            </div>
+                                            <div className=''>
+                                                <div className="text-sm font-bold text-neutral-500">
+                                                    <span>Air Conditioner</span>
+                                                </div>
+                                                <div className="text-md font-bold">
+                                                    {/* <span>{property.airConditioner}</span> */}
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className='flex items-center px-4 py-2 w-[240px]'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <GiWashingMachine size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Washing Machine</span>
+                                        <div className='flex items-center px-4 py-2 w-[240px]'>
+                                            <div className='text-neutral-700 pr-[10px]'>
+                                                <GiElectric size={25}/>
+                                            </div>
+                                            <div className=''>
+                                                <div className="text-sm font-bold text-neutral-500">
+                                                    <span>Power Back-up</span>
+                                                </div>
+                                                <div className="text-md font-bold">
+                                                    {/* <span>{property.powerBackup}</span> */}
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.washingMachine}</span> */}
+                                        <div className='flex items-center px-4 py-2 w-[240px]'>
+                                            <div className='text-neutral-700 pr-[10px]'>
+                                                <MdWaterDrop size={25}/>
+                                            </div>
+                                            <div className=''>
+                                                <div className="text-sm font-bold text-neutral-500">
+                                                    <span>R.O. Unit</span>
+                                                </div>
+                                                <div className="text-md font-bold">
+                                                    {/* <span>{property.ro}</span> */}
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className='flex items-center px-4 py-2 w-[240px]'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <FaFan size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Air Conditioner</span>
-                                        </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.airConditioner}</span> */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='flex items-center px-4 py-2 w-[240px]'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <GiElectric size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Power Back-up</span>
-                                        </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.powerBackup}</span> */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='flex items-center px-4 py-2 w-[240px]'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <MdWaterDrop size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>R.O. Unit</span>
-                                        </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.ro}</span> */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='flex items-center px-4 py-2 w-[240px]'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <GiWaterGallon size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Can Water</span>
-                                        </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.canWater}</span> */}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
-                            <p className='text-lg font-bold border-b border-neutral-400/60 pb-1.5 mb-5'>
-                                Variables
-                            </p>
-                            <div className='flex flex-col'>
-                                <div className='flex items-center px-4 py-2'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <MdOutlineFastfood size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Food</span>
-                                        </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.food}</span> */}
+                                        <div className='flex items-center px-4 py-2 w-[240px]'>
+                                            <div className='text-neutral-700 pr-[10px]'>
+                                                <GiWaterGallon size={25}/>
+                                            </div>
+                                            <div className=''>
+                                                <div className="text-sm font-bold text-neutral-500">
+                                                    <span>Can Water</span>
+                                                </div>
+                                                <div className="text-md font-bold">
+                                                    {/* <span>{property.canWater}</span> */}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className='flex items-center px-4 py-2'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <IoIosPeople size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Sharing Options</span>
+                                </li>
+                                <li className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
+                                <p className='text-lg font-bold border-b border-neutral-400/60 pb-1.5 mb-5'>
+                                    Variables
+                                </p>
+                                <div className='flex flex-col'>
+                                    <div className='flex items-center px-4 py-2'>
+                                        <div className='text-neutral-700 pr-[10px]'>
+                                            <MdOutlineFastfood size={25}/>
                                         </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.sharingOptions}</span> */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='flex items-center px-4 py-2'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <BsCurrencyDollar size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Extra Charges for AC</span>
-                                        </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.extraEB}</span> */}
+                                        <div className=''>
+                                            <div className="text-sm font-bold text-neutral-500">
+                                                <span>Food</span>
+                                            </div>
+                                            <div className="text-md font-bold">
+                                                {/* <span>{property.food}</span> */}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className='flex items-center px-4 py-2'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <BsCashStack size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Booking Charges</span>
+                                    <div className='flex items-center px-4 py-2'>
+                                        <div className='text-neutral-700 pr-[10px]'>
+                                            <IoIosPeople size={25}/>
                                         </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.bookingCharges}</span> */}
+                                        <div className=''>
+                                            <div className="text-sm font-bold text-neutral-500">
+                                                <span>Sharing Options</span>
+                                            </div>
+                                            <div className="text-md font-bold">
+                                                {/* <span>{property.sharingOptions}</span> */}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
-                            <p className='text-lg font-bold border-b border-neutral-400/60 pb-1.5 mb-5'>
-                                Contact Details
-                            </p>
-                            <div className='flex flex-wrap'>
-                                <div className='flex items-center px-4 py-2'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <BsFillPersonFill size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Property In-Charge</span>
+                                    <div className='flex items-center px-4 py-2'>
+                                        <div className='text-neutral-700 pr-[10px]'>
+                                            <BsCurrencyDollar size={25}/>
                                         </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.propertyInChargeName}</span> */}
+                                        <div className=''>
+                                            <div className="text-sm font-bold text-neutral-500">
+                                                <span>Extra Charges for AC</span>
+                                            </div>
+                                            <div className="text-md font-bold">
+                                                {/* <span>{property.extraEB}</span> */}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className='flex items-center px-4 py-2'>
+                                        <div className='text-neutral-700 pr-[10px]'>
+                                            <BsCashStack size={25}/>
+                                        </div>
+                                        <div className=''>
+                                            <div className="text-sm font-bold text-neutral-500">
+                                                <span>Booking Charges</span>
+                                            </div>
+                                            <div className="text-md font-bold">
+                                                {/* <span>{property.bookingCharges}</span> */}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className='flex items-center px-4 py-2'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <MdOutlineCall size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Phone Number</span>
-                                        </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.phoneNumber}</span> */}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='flex items-center px-4 py-2'>
-                                    <div className='text-neutral-700 pr-[10px]'>
-                                        <GiRotaryPhone size={25}/>
-                                    </div>
-                                    <div className=''>
-                                        <div className="text-sm font-bold text-neutral-500">
-                                            <span>Landline</span>
-                                        </div>
-                                        <div className="text-md font-bold">
-                                            {/* <span>{property.landline}</span> */}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
+                            </>
+                        ):(
+                                <>
+                                </>
+                        )};
+                       
+                       
     
                         <li className='bg-white drop-shadow-xl rounded-lg flex justify-between text-[30px] font-bold py-[10px] px-[15px] my-[10px]'>
                             {results?.intent === "rent" ? (
@@ -377,7 +352,7 @@ import Map from '@components/Map'
 
                         </li>
                     </ul>
-                    )}
+                )}
                 </div>
             </section>
             <section className='md:fixed top-20 right-0 flex flex-col justify-between md:h-screen md:w-[27%] w-full drop-shadow-3xl md:drop-shadow-xl px-[15px] sm:px-[50px] md:px-0 mx-auto mb-16'>
