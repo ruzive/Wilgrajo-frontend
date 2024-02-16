@@ -81,6 +81,7 @@ export interface Photo {
     total_leisure_area: number;
     total_suite: number;
     total_bathroom: number;
+    total_lavatory: number;
     total_coffe_room: number;
     total_pantry: number;
     total_office: number;
