@@ -3,15 +3,14 @@ import Link from 'next/link'
 import area from '@public/assets/images/area-svgrepo-com.svg'
 import desc from '@public/assets/images/description-svgrepo-com.svg'
 import { useEffect, useState } from 'react';
-import { AiOutlineClose } from 'react-icons/ai'
+import { AiOutlineClose} from 'react-icons/ai'
 import { HiOutlineMapPin } from 'react-icons/hi2'
-import { MdOutlineCall, MdOutlineFastfood, MdWaterDrop } from 'react-icons/md'
-import { FaFan, FaToilet } from 'react-icons/fa'
-import { CgSmartHomeRefrigerator } from 'react-icons/cg'
-import { GiWashingMachine, GiRotaryPhone, GiWaterGallon, GiElectric } from 'react-icons/gi'
-import { IoIosPeople } from 'react-icons/io'
-import { IoReturnDownBack } from 'react-icons/io5'
-import { BsFillPersonFill, BsWifi, BsHouseDoor, BsClock, BsCurrencyDollar, BsActivity, BsCashStack } from 'react-icons/bs'
+import { MdOutlineCall, MdOutlineFastfood, MdWaterDrop} from 'react-icons/md'
+import { FaFan, FaToilet, FaCarSide, FaServicestack} from 'react-icons/fa'
+import { CgSmartHomeRefrigerator} from 'react-icons/cg'
+import { GiWashingMachine, GiGasStove,GiParkBench, GiCoffeeMug, GiWaterGallon, GiElectric,GiKitchenKnives, GiOfficeChair ,GiBed, GiKitchenScale} from 'react-icons/gi'
+import { IoIosPeople} from 'react-icons/io'
+import { BsHouseDoor, BsCurrencyDollar, BsActivity, BsCashStack } from 'react-icons/bs'
 import { fetchData, DataAttributes, Params, Photo } from '@app/utils/utils';
 import Slider from '@components/Slider';
 import Image from 'next/image'
@@ -81,7 +80,11 @@ import Map from '@components/Map'
                                         <span>Description</span>
                                     </div>
                                     <div className="text-md font-bold">
-                                         <span>{results?.obs}</span>
+                                        <ul>
+                                                    {results?.obs.split('#').map((item, index) => (
+                                                    <li key={index}>{item.trim()}</li>
+                                                    ))}
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -107,11 +110,13 @@ import Map from '@components/Map'
                     </ul>
                     ):(
                     <ul className='flex flex-col'>  
+                    
                         <li className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
                             <p className='text-lg font-bold border-b border-neutral-400/60 pb-1.5 mb-5'>
                                 Property Details for { results?.property_type.toUpperCase()} ID {params.id }
                             </p>
                             <div className='flex flex-wrap'>
+                            {results?.total_room !==0 && (
                                 <div className='flex items-center px-4 py-2 w-[240px]'>
                                     <div className='text-neutral-700 pr-[10px]'>
                                         <BsHouseDoor size={25}/>
@@ -123,15 +128,131 @@ import Map from '@components/Map'
                                         <div className="text-md font-bold">
                                              <span>{results?.total_room}</span> 
                                         </div>
+                                        
+                                    </div>
+                                </div>
+                            )}
+                            {results?.total_bedroom !==0 && results?.property_type !== "commercial" && (
+                                <div className='flex items-center px-4 py-2 w-[240px]'>
+                                    <div className='text-neutral-700 pr-[10px]'>
+                                        <GiBed size={25}/>
+                                    </div>
+                                    <div className=''>
                                         <div className="text-sm font-bold text-neutral-500">
                                             <span>BedRooms</span>
                                         </div>
                                         <div className="text-md font-bold">
                                              <span>{results?.total_bedroom}</span> 
                                         </div>
-
                                     </div>
                                 </div>
+                            )}
+                            {results?.total_maids_room !==0 && results?.property_type !== "commercial" && results?.property_type !== "apartment" &&(
+                                        <div className='flex items-center px-4 py-2 w-[240px]'>
+                                        <div className='text-neutral-700 pr-[10px]'>
+                                            <GiBed size={25}/>
+                                        </div>
+                                        <div className=''>
+                                        <div className="text-sm font-bold text-neutral-500">
+                                            <span>Guest Rooms</span>
+                                        </div>
+                                        <div className="text-md font-bold">
+                                             <span>{results?.total_maids_room}</span> 
+                                        </div>
+                                        </div>
+                                </div>
+                                        )}
+                            {results?.total_office !==0 && (
+                                <div className='flex items-center px-4 py-2 w-[240px]'>
+                                    <div className='text-neutral-700 pr-[10px]'>
+                                        <GiOfficeChair size={25}/>
+                                    </div>
+                                    <div className=''>
+                                        <div className="text-sm font-bold text-neutral-500">
+                                            <span>Offices</span>
+                                        </div>
+                                        <div className="text-md font-bold">
+                                             <span>{results?.total_office}</span> 
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            {results?.total_kitchen !==0 && (
+                                <div className='flex items-center px-4 py-2 w-[240px]'>
+                                    <div className='text-neutral-700 pr-[10px]'>
+                                        <GiKitchenKnives size={25}/>
+                                    </div>
+                                    <div className=''>
+                                        <div className="text-sm font-bold text-neutral-500">
+                                            <span>Kitchen</span>
+                                        </div>
+                                        <div className="text-md font-bold">
+                                             <span>{results?.total_kitchen}</span> 
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            {results?.total_pantry !==0 && results?.property_type !== "commercial" &&(
+                                <div className='flex items-center px-4 py-2 w-[240px]'>
+                                    <div className='text-neutral-700 pr-[10px]'>
+                                        <GiKitchenScale size={25}/>
+                                    </div>
+                                    <div className=''>
+                                        <div className="text-sm font-bold text-neutral-500">
+                                            <span>Pantry</span>
+                                        </div>
+                                        <div className="text-md font-bold">
+                                             <span>{results?.total_pantry}</span> 
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            {results?.total_coffe_room !==0 && results?.property_type !== "commercial" &&(
+                                <div className='flex items-center px-4 py-2 w-[240px]'>
+                                    <div className='text-neutral-700 pr-[10px]'>
+                                        <GiCoffeeMug size={25}/>
+                                    </div>
+                                    <div className=''>
+                                        <div className="text-sm font-bold text-neutral-500">
+                                            <span>Coffee Room</span>
+                                        </div>
+                                        <div className="text-md font-bold">
+                                             <span>{results?.total_coffe_room}</span> 
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                             {results?.total_leisure_area !==0 && results?.property_type !== "commercial" && results?.property_type !== "apartment" &&(
+                                <div className='flex items-center px-4 py-2 w-[240px]'>
+                                    <div className='text-neutral-700 pr-[10px]'>
+                                        <GiParkBench size={25}/>
+                                    </div>
+                                    <div className=''>
+                                        <div className="text-sm font-bold text-neutral-500">
+                                            <span>Leisure Area</span>
+                                        </div>
+                                        <div className="text-md font-bold">
+                                             <span>{results?.total_leisure_area}</span> 
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                              {results?.total_hall !==0 && results?.property_type !== "commercial" &&(
+                                <div className='flex items-center px-4 py-2 w-[240px]'>
+                                    <div className='text-neutral-700 pr-[10px]'>
+                                        <GiParkBench size={25}/>
+                                    </div>
+                                    <div className=''>
+                                        <div className="text-sm font-bold text-neutral-500">
+                                            <span>Hall</span>
+                                        </div>
+                                        <div className="text-md font-bold">
+                                             <span>{results?.total_hall}</span> 
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
                                 <div className='flex items-center px-4 py-2 w-[240px]'>
                                     <div className='text-neutral-700 pr-[10px]'>
                                         <FaToilet size={25}/>
@@ -140,32 +261,62 @@ import Map from '@components/Map'
                                         <div className="text-sm font-bold text-neutral-500">
                                             <span>Bathrooms</span>
                                         </div>
+                                        {results?.property_type !== "apartment" ? (
                                         <div className="text-md font-bold">
                                              <span>{results?.total_bathroom}</span> 
                                         </div>
+                                        ):(
+                                            <div className="text-md font-bold">
+                                            <span>{results?.total_lavatory}</span> 
+                                       </div> 
+                                        )}
+
+                                        {results?.total_guest_wc !==0 && results?.property_type !== "commercial" && results?.property_type !== "apartment" &&(
+                                        <>
                                         <div className="text-sm font-bold text-neutral-500">
                                             <span>Guest Bathrooms</span>
                                         </div>
                                         <div className="text-md font-bold">
                                              <span>{results?.total_guest_wc}</span> 
                                         </div>
+                                        </>
+                                        )}
+                                        
                                     </div>
                                 </div>
+                                {results?.total_service_area !==0 && (
                                 <div className='flex items-center px-4 py-2 w-[240px]'>
                                     <div className='text-neutral-700 pr-[10px]'>
-                                        <BsClock size={25}/>
+                                        <FaServicestack size={25}/>
                                     </div>
                                     <div className=''>
                                         <div className="text-sm font-bold text-neutral-500">
-                                            <span>In-Time</span>
+                                            <span>Service Area</span>
                                         </div>
                                         <div className="text-md font-bold">
-                                             <span>{}</span> 
+                                             <span>{results?.total_service_area}</span> 
                                         </div>
                                     </div>
                                 </div>
+                                )}
+                                {results?.total_garage !== 0 && (
+                                <div className='flex items-center px-4 py-2 w-[240px]'>
+                                    <div className='text-neutral-700 pr-[10px]'>
+                                        <FaCarSide size={25}/>
+                                    </div>
+                                    <div className=''>
+                                        <div className="text-sm font-bold text-neutral-500">
+                                            <span>Garage</span>
+                                        </div>
+                                        <div className="text-md font-bold">
+                                             <span>{results?.total_garage}</span> 
+                                        </div>
+                                    </div>
+                                </div>
+                                )}
                             </div>
                         </li>
+               
                         {results?.property_type === "apartment" ?(
                             <>
                                     <li className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
@@ -175,11 +326,11 @@ import Map from '@components/Map'
                                     <div className='flex flex-wrap'>
                                         <div className='flex items-center px-4 py-2 w-[240px]'>
                                             <div className='text-neutral-700 pr-[10px]'>
-                                                <BsWifi size={25}/>
+                                                <GiGasStove size={25}/>
                                             </div>
                                             <div className=''>
                                                 <div className="text-sm font-bold text-neutral-500">
-                                                    <span>Wifi</span>
+                                                    <span>Gas/Electric Stove</span>
                                                 </div>
                                                 <div className="text-md font-bold">
                                                     {/* <span>{property.wifi}</span> */}
@@ -257,7 +408,7 @@ import Map from '@components/Map'
                                             </div>
                                             <div className=''>
                                                 <div className="text-sm font-bold text-neutral-500">
-                                                    <span>Can Water</span>
+                                                    <span>Water Dispenser</span>
                                                 </div>
                                                 <div className="text-md font-bold">
                                                     {/* <span>{property.canWater}</span> */}
@@ -268,58 +419,28 @@ import Map from '@components/Map'
                                 </li>
                                 <li className='bg-white drop-shadow-xl rounded-lg p-5 my-[10px]'>
                                 <p className='text-lg font-bold border-b border-neutral-400/60 pb-1.5 mb-5'>
-                                    Variables
+                                    Observations
                                 </p>
                                 <div className='flex flex-col'>
                                     <div className='flex items-center px-4 py-2'>
                                         <div className='text-neutral-700 pr-[10px]'>
-                                            <MdOutlineFastfood size={25}/>
-                                        </div>
-                                        <div className=''>
                                             <div className="text-sm font-bold text-neutral-500">
-                                                <span>Food</span>
-                                            </div>
-                                            <div className="text-md font-bold">
-                                                {/* <span>{property.food}</span> */}
+                                                <ul>
+                                                {results?.description?.split('#').map((item, index) => (
+                                                        <li key={index}>{item.trim()}</li>
+                                                ))} 
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                     <div className='flex items-center px-4 py-2'>
                                         <div className='text-neutral-700 pr-[10px]'>
-                                            <IoIosPeople size={25}/>
-                                        </div>
-                                        <div className=''>
                                             <div className="text-sm font-bold text-neutral-500">
-                                                <span>Sharing Options</span>
-                                            </div>
-                                            <div className="text-md font-bold">
-                                                {/* <span>{property.sharingOptions}</span> */}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='flex items-center px-4 py-2'>
-                                        <div className='text-neutral-700 pr-[10px]'>
-                                            <BsCurrencyDollar size={25}/>
-                                        </div>
-                                        <div className=''>
-                                            <div className="text-sm font-bold text-neutral-500">
-                                                <span>Extra Charges for AC</span>
-                                            </div>
-                                            <div className="text-md font-bold">
-                                                {/* <span>{property.extraEB}</span> */}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='flex items-center px-4 py-2'>
-                                        <div className='text-neutral-700 pr-[10px]'>
-                                            <BsCashStack size={25}/>
-                                        </div>
-                                        <div className=''>
-                                            <div className="text-sm font-bold text-neutral-500">
-                                                <span>Booking Charges</span>
-                                            </div>
-                                            <div className="text-md font-bold">
-                                                {/* <span>{property.bookingCharges}</span> */}
+                                                <ul>
+                                                    {results?.obs.split('#').map((item, index) => (
+                                                    <li key={index}>{item.trim()}</li>
+                                                    ))}
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -330,10 +451,11 @@ import Map from '@components/Map'
                                 <>
                                 </>
                         )};
-                       
-                       
-    
-                        <li className='bg-white drop-shadow-xl rounded-lg flex justify-between text-[30px] font-bold py-[10px] px-[15px] my-[10px]'>
+                        
+                    </ul>
+                )}
+                <ul>
+                <li className='bg-white drop-shadow-xl rounded-lg flex justify-between text-[30px] font-bold py-[10px] px-[15px] my-[10px]'>
                             {results?.intent === "rent" ? (
                                 <>
                                 <span >RENT</span>
@@ -351,8 +473,7 @@ import Map from '@components/Map'
                              )}
 
                         </li>
-                    </ul>
-                )}
+                </ul>
                 </div>
             </section>
             <section className='md:fixed top-20 right-0 flex flex-col justify-between md:h-screen md:w-[27%] w-full drop-shadow-3xl md:drop-shadow-xl px-[15px] sm:px-[50px] md:px-0 mx-auto mb-16'>
