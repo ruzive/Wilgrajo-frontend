@@ -34,8 +34,8 @@ export interface Photo {
     created: string;
     modified: string;
     title: string;
-    longitude: string;
-    latitude: string;
+    longitude: number;
+    latitude: number;
     description: string | null;
     status: number;
     activate_date: string;
@@ -173,14 +173,20 @@ async function getAProperty({ params }: { params: Params }): Promise<ApiResponse
   }
 }
 
-export async function fetchData({ params }: { params: Params }): Promise<DataAttributes | undefined> {
+export async function fetchData({ params }: { params: Params }): Promise<DataAttributes> {
   try {
     const apiResponse: ApiResponse = await getAProperty({ params });
     return apiResponse.data.attributes;
   } catch (error) {
     console.error('Error fetching data:', error);
-    return undefined;
+    throw error;
   }
 }
+
+export const getRandomPhoto = (photos: Photo[]): string | undefined => {
+  if (photos.length === 0) return undefined; // Return undefined if the photos array is empty
+  const randomIndex = Math.floor(Math.random() * photos.length); // Generate a random index
+  return photos[randomIndex].image[0]; // Return the URL of the random photo
+};
 
 

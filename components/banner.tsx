@@ -12,6 +12,7 @@ const Banner = () => {
             alt="Wilgrajo Logo"
             width ={380}
             height={120}
+            className="hidden md:block"
             priority/>
         </div>
         <div className="text-[50px] mt-[15px]">
@@ -28,7 +29,7 @@ const Banner = () => {
         <div className="absolute top-[20%] left-[25%] bg-[#A49DEA] p-[200px] rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-blob1"></div>
         <div className="absolute top-[-20%] left-[-15%] bg-[#9CD2F4] p-[200px] rounded-full mix-blend-multiply filter blur-xl opacity-50 animate-blob2"></div>
     </div>
-  )
+  );
 }
 
 export default Banner
