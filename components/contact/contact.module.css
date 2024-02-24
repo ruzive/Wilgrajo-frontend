@@ -1,0 +1,4 @@
+.grid-container {
+  max-width: 80%; /* Set the maximum width to 80% */
+  margin: 0 auto; /* Center the grid horizontally */
+}

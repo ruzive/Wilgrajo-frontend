@@ -24,7 +24,7 @@ const Slider = ({ photos }: SliderProps) => {
          prevEl: '.swiper-button-prev',
        }}
        className="mySwiper h-full w-full rounded-xl"
-    onSwiper={(swiper) => console.log(swiper)}
+    onSwiper={(swiper: any) => console.log(swiper)}
     onSlideChange={() => console.log('slide change')}
   >
      {photos.map((pic) => (

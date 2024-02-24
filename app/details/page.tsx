@@ -1,3 +1,4 @@
+'use client'
 import { useState } from 'react'
 import Link from 'next/link'
 import { AiOutlineClose } from 'react-icons/ai'
@@ -9,9 +10,10 @@ import { GiWashingMachine, GiPathDistance, GiRotaryPhone, GiWaterGallon, GiElect
 import { IoIosPeople } from 'react-icons/io'
 import { IoReturnDownBack } from 'react-icons/io5'
 import { BsFillPersonFill, BsWifi, BsHouseDoor, BsCurrencyDollar, BsClock, BsCashStack } from 'react-icons/bs'
+// import dynamic from "next/dynamic";
+// const DynamicMapComponent = dynamic(() => import("@components/Map"), { ssr: false });
 // import Map from './Map'
 // import Slider from './Slider'
-
 // import { PropertyType } from '../typings'
 // interface Props {
 //     property: PropertyType,
@@ -345,7 +347,7 @@ const PropertyDetails = () => {
                     {/* </div> */}
                 </button>
                 <div className='h-[300px] md:min-h-[60%] w-full mt-10 md:mt-0'>
-                    {/* <Map property={property}/> */}
+                     {/* <DynamicMapComponent property={property}/>  */}
                 </div>
             </section>
             {/* {slider 

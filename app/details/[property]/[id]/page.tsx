@@ -5,24 +5,24 @@ import desc from '@public/assets/images/description-svgrepo-com.svg'
 import { useEffect, useState } from 'react';
 import { AiOutlineClose} from 'react-icons/ai'
 import { HiOutlineMapPin } from 'react-icons/hi2'
-import { MdOutlineCall, MdOutlineFastfood, MdWaterDrop} from 'react-icons/md'
+import { MdWaterDrop} from 'react-icons/md'
 import { FaFan, FaToilet, FaCarSide, FaServicestack} from 'react-icons/fa'
 import { CgSmartHomeRefrigerator} from 'react-icons/cg'
 import { GiWashingMachine, GiGasStove,GiParkBench, GiCoffeeMug, GiWaterGallon, GiElectric,GiKitchenKnives, GiOfficeChair ,GiBed, GiKitchenScale} from 'react-icons/gi'
-import { IoIosPeople} from 'react-icons/io'
-import { BsHouseDoor, BsCurrencyDollar, BsActivity, BsCashStack } from 'react-icons/bs'
-import { fetchData, DataAttributes, Params, Photo } from '@app/utils/utils';
+import { BsHouseDoor,BsActivity} from 'react-icons/bs'
+import { fetchData, DataAttributes, Params, getRandomPhoto } from '@app/utils/utils';
 import Slider from '@components/Slider';
 import Image from 'next/image'
-import Map from '@components/Map'
+import Map from '@components/Map';
 
 
 
-  
+
   const PropertyDetails = ({ params }: { params: Params }) => {
     const [results, setResults] = useState<DataAttributes>();
     const [error, setError] = useState<string | null>(null);
     const [slider, setSlider] = useState<boolean>(false);
+  
   
     useEffect(() => {
       const getPropData = async () => {
@@ -35,7 +35,6 @@ import Map from '@components/Map'
           setError('Error fetching data. Please try again later.'); // Set error message
         }
       };
-  
       getPropData();
     }, [params]);
     
@@ -43,11 +42,12 @@ import Map from '@components/Map'
         console.log('click')
         setSlider(!slider); // Toggle slider state
       };
-      const getRandomPhoto = (photos: Photo[]): string | undefined => {
-        if (photos.length === 0) return undefined; // Return undefined if the photos array is empty
-        const randomIndex = Math.floor(Math.random() * photos.length); // Generate a random index
-        return photos[randomIndex].image[0]; // Return the URL of the random photo
-      };
+    //   const getRandomPhoto = (photos: Photo[]): string | undefined => {
+    //     if (photos.length === 0) return undefined; // Return undefined if the photos array is empty
+    //     const randomIndex = Math.floor(Math.random() * photos.length); // Generate a random index
+    //     return photos[randomIndex].image[0]; // Return the URL of the random photo
+    //   };
+
   return (
         <div className='relative flex flex-col md:flex-row w-full'>
             <section className='flex flex-col  justify-between px-[15px] sm:px-[50px] xl:px-[100px] py-[60px] md:w-[75%] w-full ' style={{ marginLeft: '-55px' }}>
@@ -480,10 +480,12 @@ import Map from '@components/Map'
                 <button className='relative md:min-h-[40%]' onClick={handleSlider} >
                      <div key={results?.uuid} className="flex"> 
                         <div className="relative h-full w-full">
-                             <img 
+                             <Image
                                 className='relative h-[5%] w-full' 
-                                src={results?.photos[0].image[0]} 
+                                src={getRandomPhoto(results?.photos??[]) || ''} 
                                 alt="Property Image"
+                                width={50}
+                                height={50}
                                 />
                         </div>
                         <div className='absolute top-0 left-0 text-white text-left font-bold bg-neutral-600/50 h-full w-full p-3'>
@@ -496,14 +498,17 @@ import Map from '@components/Map'
                         </div>
                      </div> 
                 </button>
-                {/* <div className='h-[300px] md:min-h-[60%] w-full mt-10 md:mt-0'>
-                     <Map property={results}/>
-                </div> */}
+                <div className='h-[300px] md:min-h-[60%] w-full mt-10 md:mt-0'>
+
+                {results && <Map property={results} />}
+                {/* <Map/> */}
+               
+                </div>
             </section>
             {slider && results && (
                 <div className='fixed top-0 left-0 z-10 flex justify-center items-center bg-neutral-600/70 h-screen w-full'>
                     <div className='w-[80%] h-[80%]'>
-                        <Slider photos={results.photos} />
+                        <Slider photos={results?.photos} />
                     </div>
                     <button className='bg-neutral-800/80 rounded-full fixed top-10 right-10 z-10 text-white p-1'  onClick={handleSlider}>
                         <AiOutlineClose size={25} />
@@ -514,5 +519,6 @@ import Map from '@components/Map'
     
     )
 }
+  
 
 export default PropertyDetails

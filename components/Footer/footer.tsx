@@ -1,9 +1,10 @@
+import Socials from "@components/social"
 
 
 const Footer = () => {
   return (
-    <div>footer</div>
-  )
+      <Socials/>
+  );
 }
 
 export default Footer
