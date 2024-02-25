@@ -2,19 +2,12 @@
 import { DataAttributes, getRandomPhoto } from "@app/utils/utils";
 import { Loader } from "@googlemaps/js-api-loader";
 import React, { useEffect } from "react";
-
+import Image from "next/image";
 
 // //2. Define the interface for Props.
 interface Props {
     property: DataAttributes
 }
-
-// interface Location {
-//   lat: number,
-//   lng: number
-// }
-
-
 
 // export function MapComponent({ lat, lng }: Location) {
 export default function Map({ property }: Props) {
@@ -58,7 +51,7 @@ export default function Map({ property }: Props) {
            const infoWindowContent = `
            <div class="max-w-xs">
              <h2 class="text-xl font-semibold mb-2">${property.title}</h2>
-             <img src="${getRandomPhoto(property.photos)}" alt="${property.title}" className="max-h-[50px] max-w-[50px] rounded-lg">
+             <Image src="${getRandomPhoto(property.photos)}" alt="${property.title}" width ={40} height={50} className="max-h-[50px] max-w-[50px] rounded-lg">
              <p class="text-gray-600 mb-2">${property.description}</p>
              <p class="text-blue-500 font-semibold">Price: ${property.price}</p>
            </div>
@@ -82,25 +75,4 @@ export default function Map({ property }: Props) {
   return (
     <div style={{height:'400px'}} ref={mapRef}/>
   )
-
-  // return (
-  //   <GoogleMap
-  //     zoom={16}
-  //     center={{ lat, lng }}
-  //     mapContainerClassName="rounded-xl sm:rounded-none h-full w-full"
-  //   >
-  //     <MarkerF position={{ lat, lng }} />
-  //   </GoogleMap>
-  // );
 }
-
-// export default function Map({ property }: Props) {
-//   const lat = property.latitude;
-//   const lng = property.longitude;
-//   // const { isLoaded } = useLoadScript({
-//   //   googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
-//   // });
-  
-//   // if (!isLoaded) return <div>Loading...</div>;
-//   // return <MapComponent lat={lat} lng={lng}/>;
-// }
