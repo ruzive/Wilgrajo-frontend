@@ -1,5 +1,5 @@
 import Link from "next/link"
-import NavLink from "../navLink/NavLink"
+import NavLink from '@components/navbar/navLink/navLink'
 
 
 const Links = () => {
@@ -10,11 +10,11 @@ const Links = () => {
       path:"/",
 
     },
-    {
-      title:"About",
-      path:"/about",
+    // {
+    //   title:"About",
+    //   path:"/about",
 
-    },
+    // },
     {
       title:"Contact Us",
       path:"/contact-us",
@@ -29,7 +29,7 @@ const Links = () => {
       {links.map((link=>(
         <NavLink item={link} key={link.path}/>
        )))}
-      {session ? (
+      {/* {session ? (
        <>
         
           {isAdmin && <NavLink item={{title : "Admin", path: "/admin"}}/>} 
@@ -38,7 +38,7 @@ const Links = () => {
         </>
       ) : (
         <NavLink item={{title : "Login", path: "/login"}} />
-      )}
+      )} */}
     </div>
   )
 }
