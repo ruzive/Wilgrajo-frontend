@@ -10,7 +10,7 @@ const Socials: FunctionComponent = () => {
             Made with 
             <span className='mx-[5px]'>
                 <GiMineralHeart size={25}/>
-            </span> Ruzive
+            </span> RLM
         </div>
         <div className='flex justify-center font-semibold my-[10px]'>
             Hang out with us on our socials
@@ -19,7 +19,7 @@ const Socials: FunctionComponent = () => {
                 <FaTwitterSquare size={25}/></Link>
             </span>
             <span className='mx-[5px]'>
-            <Link href='#' className='font-bold shadow-2xl rounded-lg bg-neutral-600/30 text-neutral-700 hover:text-neutral-300 hover:bg-neutral-600/60 transition duration-300 cursor-pointer my-[10px]'>
+            <Link href='https://www.facebook.com/wigrajo' className='font-bold shadow-2xl rounded-lg bg-neutral-600/30 text-neutral-700 hover:text-neutral-300 hover:bg-neutral-600/60 transition duration-300 cursor-pointer my-[10px]'>
                 <FaFacebookSquare size={25}/></Link>
             </span>
             <span className='mx-[5px]'>
