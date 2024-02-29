@@ -8,7 +8,7 @@ import { HiOutlineMapPin } from 'react-icons/hi2'
 import { MdWaterDrop} from 'react-icons/md'
 import { FaFan, FaToilet, FaCarSide, FaServicestack} from 'react-icons/fa'
 import { CgSmartHomeRefrigerator} from 'react-icons/cg'
-import { GiWashingMachine, GiGasStove,GiParkBench, GiCoffeeMug, GiWaterGallon, GiElectric,GiKitchenKnives, GiOfficeChair ,GiBed, GiKitchenScale} from 'react-icons/gi'
+import { GiWashingMachine, GiGasStove,GiParkBench, GiCoffeeMug, GiWaterGallon, GiElectric, GiBanknote , GiKitchenKnives, GiOfficeChair ,GiBed, GiKitchenScale} from 'react-icons/gi'
 import { BsHouseDoor,BsActivity} from 'react-icons/bs'
 import { fetchData, DataAttributes, Params, getRandomPhoto } from '@app/utils/utils';
 import Slider from '@components/Slider';
@@ -60,8 +60,10 @@ import Map from '@components/Map';
                             <span><HiOutlineMapPin size={20}/></span>
                             {results?.neighborhood.title}/{results?.city.title} 
                         </p>
-                        <p className='text-[#228B22] text-2xl mt-1.5'>
-                                 <span>{Number(results?.price).toLocaleString('en-US', { style: 'currency', currency: 'ZMW' })}</span> 
+                        <p className=' flex text-[#228B22] text-2xl mt-1.5'>
+                                 <span>
+                                 <GiBanknote size={40}/></span>
+                                 {Number(results?.price).toLocaleString('en-US', { style: 'currency', currency: 'ZMW' })} 
                         </p>
                     </div>
                     {results?.property_type === "land" ?(
@@ -458,14 +460,14 @@ import Map from '@components/Map';
                 <li className='bg-white drop-shadow-xl rounded-lg flex justify-between text-[30px] font-bold py-[10px] px-[15px] my-[10px]'>
                             {results?.intent === "rent" ? (
                                 <>
-                                <span >RENT</span>
+                                <span >RENT</span><GiBanknote size={40}/>
                                     <div className='text-[#228B22]'>
                                     <span>{Number(results?.price).toLocaleString('en-US', { style: 'currency', currency: 'ZMW' })}</span> 
                                 </div>
                                 </>
                                     ) : (
                                         <>
-                                        <span >BUY</span>
+                                        <span >BUY</span><GiBanknote size={40}/>
                                             <div className='text-[#228B22]'>
                                             <span>{Number(results?.price).toLocaleString('en-US', { style: 'currency', currency: 'ZMW' })}</span> 
                                         </div>

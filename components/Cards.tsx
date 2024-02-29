@@ -2,6 +2,7 @@ import Link from "next/link";
 import { HiOutlineMapPin } from "react-icons/hi2";
 import { ImPriceTags } from "react-icons/im";
 import { Result,getRandomPhoto } from "@app/utils/utils";
+import { GiBanknote } from "react-icons/gi";
 
 interface CardsProps {
   results: Result[];
@@ -55,7 +56,7 @@ const Cards = ({ results }: CardsProps) => {
                   </li>
                   <li className="flex justify-between text-[22px] font-bold py-[1px]">
                     <span className="flex-start">
-                      <ImPriceTags />
+                      <GiBanknote />
                     </span>
                     <span className="text-black-600">{Number(result.price).toLocaleString('en-US', { style: 'currency', currency: 'ZMW' })}</span>
 

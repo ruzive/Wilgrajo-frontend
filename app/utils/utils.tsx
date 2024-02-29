@@ -133,6 +133,10 @@ export interface ApiResponse {
     id: string;
   }
 
+  export interface Searchterm {
+    term: string;
+  }
+
 
 
 async function getData():Promise<ResponseData> {
@@ -144,7 +148,7 @@ async function getData():Promise<ResponseData> {
     }
    
      const data: ResponseData = await res.json();
-     console.log('Fetched data:', data.data);
+    //  console.log('Fetched data:', data.data);
      return data
   }
  
@@ -174,6 +178,29 @@ async function getAProperty({ params }: { params: Params }): Promise<ApiResponse
 }
 
 export async function fetchData({ params }: { params: Params }): Promise<DataAttributes> {
+  try {
+    const apiResponse: ApiResponse = await getAProperty({ params });
+    return apiResponse.data.attributes;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw error;
+  }
+}
+
+async function getfilteredData({searchterm}:{searchterm: Searchterm}):Promise<ResponseData> {
+  const res = await fetch(`http://localhost:8000/api/property/filter/${searchterm}`, { next: { revalidate: 3600 }})
+ 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+ 
+   const data: ResponseData = await res.json();
+  //  console.log('Fetched data:', data.data);
+   return data
+}
+
+export async function fetchfilteredData({ params }: { params: Params }): Promise<DataAttributes> {
   try {
     const apiResponse: ApiResponse = await getAProperty({ params });
     return apiResponse.data.attributes;

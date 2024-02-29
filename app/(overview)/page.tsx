@@ -1,11 +1,19 @@
 'use client'
 import { useEffect, useState } from 'react';
 import Cards from "@components/Cards";
-import {Page} from './utils/utils';
-import {Result} from './utils/utils';
+import {Page} from '../utils/utils';
+import {Result} from '../utils/utils';
 
 
-export default function Home() {
+export default function Home(
+  {
+    searchParams,
+  }: {
+    searchParams?: {
+      query?: string;
+      page?: string;
+    };
+  })  {
   const [results, setResults] = useState<Result[]>([]);
   const [error, setError] = useState<string | null>(null);
 
