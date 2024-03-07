@@ -22,7 +22,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <main className='flex flex-col lg:flex-row justify-end min-h-screen'> 
-          <section className='relative bg-gradient-to-tr from-[#558b00]/60 to-[#fe3e0a]/60 lg:w-[100%]'>
+          <section 
+            className='lg:fixed lg:left-0 flex flex-col justify-center lg:w-[31%] lg:h-screen mt-[50px] lg:mt-[0px] mb-[20px] lg:mb-[0px]'> 
+            <Banner placeholder='Search by intent, location and condition.'/>
+            <Footer/>
+          </section>
+          <section className='relative bg-gradient-to-tr from-[#558b00]/60 to-[#fe3e0a]/60 lg:w-[69%]'>
             <Nav/>
             {children}
           </section>

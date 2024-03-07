@@ -1,7 +1,5 @@
 'use client'
-import Link from 'next/link'
 import area from '@public/assets/images/area-svgrepo-com.svg'
-import desc from '@public/assets/images/description-svgrepo-com.svg'
 import { useEffect, useState } from 'react';
 import { AiOutlineClose} from 'react-icons/ai'
 import { HiOutlineMapPin } from 'react-icons/hi2'
@@ -14,6 +12,7 @@ import { fetchData, DataAttributes, Params, getRandomPhoto } from '@app/utils/ut
 import Slider from '@components/Slider';
 import Image from 'next/image'
 import Map from '@components/Map';
+import ErrorBoundary from '@app/utils/error';
 
 
 
@@ -42,15 +41,11 @@ import Map from '@components/Map';
         console.log('click')
         setSlider(!slider); // Toggle slider state
       };
-    //   const getRandomPhoto = (photos: Photo[]): string | undefined => {
-    //     if (photos.length === 0) return undefined; // Return undefined if the photos array is empty
-    //     const randomIndex = Math.floor(Math.random() * photos.length); // Generate a random index
-    //     return photos[randomIndex].image[0]; // Return the URL of the random photo
-    //   };
 
   return (
+    <ErrorBoundary>
         <div className='relative flex flex-col md:flex-row w-full'>
-            <section className='flex flex-col  justify-between px-[15px] sm:px-[50px] xl:px-[100px] py-[60px] md:w-[75%] w-full ' style={{ marginLeft: '-55px' }}>
+            <section className='flex flex-col  justify-between px-[15px] sm:px-[50px] xl:px-[100px] py-[60px] md:w-[60%] w-full ' style={{ marginLeft: '-10px' }}>
                 <div>
                     <div className='bg-gradient-to-tr from-[#C2B9F2]/50 to-[#ACDFF2]/50 rounded-lg drop-shadow-2xl border px-5 py-10 my-[30px]'>
                         <h3 className='text-[35px] font-bold'>
@@ -478,16 +473,16 @@ import Map from '@components/Map';
                 </ul>
                 </div>
             </section>
-            <section className='md:fixed top-20 right-0 flex flex-col justify-between md:h-screen md:w-[27%] w-full drop-shadow-3xl md:drop-shadow-xl px-[15px] sm:px-[50px] md:px-0 mx-auto mb-16'>
+            <section className='md:fixed top-20 right-0 flex flex-col justify-between md:h-screen md:w-[40%] w-full drop-shadow-3xl md:drop-shadow-xl px-[15px] sm:px-[50px] md:px-0 mx-auto mb-16'>
                 <button className='relative md:min-h-[40%]' onClick={handleSlider} >
                      <div key={results?.uuid} className="flex"> 
-                        <div className="relative h-full w-full">
+                        <div className="h-[100%] w-[100%]">
                              <Image
                                 className='relative h-[5%] w-full' 
                                 src={getRandomPhoto(results?.photos??[]) || ''} 
                                 alt="Property Image"
-                                width={50}
-                                height={50}
+                                width={250}
+                                height={150}
                                 />
                         </div>
                         <div className='absolute top-0 left-0 text-white text-left font-bold bg-neutral-600/50 h-full w-full p-3'>
@@ -518,9 +513,9 @@ import Map from '@components/Map';
                 </div>
             )}
         </div>
-    
-    )
-}
+        </ErrorBoundary>
+    );
+};
   
 
 export default PropertyDetails

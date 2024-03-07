@@ -1,12 +1,13 @@
 import Link from "next/link"
 import NavLink from '@components/navbar/navLink/navLink'
+import ErrorBoundary from "@app/utils/error";
 
 
 const Links = () => {
 
   const links = [
     {
-      title:"Homepage",
+      title:"Home",
       path:"/",
 
     },
@@ -25,6 +26,7 @@ const Links = () => {
   const session = true
   const isAdmin = true
   return (  
+
     <div className="links">
       {links.map((link=>(
         <NavLink item={link} key={link.path}/>
@@ -40,7 +42,8 @@ const Links = () => {
         <NavLink item={{title : "Login", path: "/login"}} />
       )} */}
     </div>
-  )
-}
 
-export default Links
+  );
+};
+
+export default Links;

@@ -98,12 +98,6 @@ export interface Relationships {
   };
 }
 
-// interface Data {
-//   type: string;
-//   id: string;
-//   attributes: DataAttributes;
-//   relationships: Relationships;
-// }
 
 export interface ApiResponse {
   data: Data;
@@ -134,13 +128,53 @@ export interface ApiResponse {
   }
 
   export interface Searchterm {
-    term: string;
+    query: string;
   }
 
+  interface FormData {
+    name: string;
+    whatsapp_number: string;
+    email: string;
+    message: string;
+  }
+
+  // export async function getProperties({searchterm}:{searchterm: Searchterm}):Promise<ResponseData> {
+  //   try{
+  //     if( searchterm!== undefined){
+
+  //       const responseData: ResponseData = await getfilteredPropertyListData(searchterm)
+  //       return responseData;
+
+  //     }else{
+  //       const responseData: ResponseData = await getData()
+  //       return responseData;
+  //     }
+  //   }catch (error) 
+  //   {
+  //       console.error('Error fetching data:', error);
+  //       throw error;
+  //   }
+  // }
+
+  export async function getProperties({ searchterm }: { searchterm?: Searchterm }) {
+    try {
+
+        if (searchterm !== undefined) {
+            const responseData: ResponseData = await getfilteredPropertyListData(searchterm);
+            return responseData.data.data.results;
+        } else {
+            const responseData: ResponseData = await getData();
+            return responseData.data.data.results;
+        }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        throw error;
+    }
+}
 
 
 async function getData():Promise<ResponseData> {
-    const res = await fetch('http://localhost:8000/api/property/list', { next: { revalidate: 3600 }})
+    const res = await fetch('http://localhost:8000/api/property/list')
    
     if (!res.ok) {
       // This will activate the closest `error.js` Error Boundary
@@ -187,8 +221,34 @@ export async function fetchData({ params }: { params: Params }): Promise<DataAtt
   }
 }
 
-async function getfilteredData({searchterm}:{searchterm: Searchterm}):Promise<ResponseData> {
-  const res = await fetch(`http://localhost:8000/api/property/filter/${searchterm}`, { next: { revalidate: 3600 }})
+export const postFormData = async (formData: FormData): Promise<any> => {
+  try {
+    const response = await fetch('http://localhost:8000/api/contact/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', // Assuming you're sending JSON data
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to post form data');
+    }
+
+    // If the response is successful, you can handle it accordingly
+    const responseData = await response.json();
+    console.log('Response Data:', responseData);
+    // Optionally, return the response data if needed
+    return responseData;
+  } catch (error) {
+    console.error('Error posting form data:', error);
+    // Handle errors
+    throw error;
+  }
+};
+
+async function getfilteredPropertyListData(searchterm: Searchterm):Promise<ResponseData> {
+  const res = await fetch(`http://localhost:8000/api/properties/?filter%5Bsearch%5D${searchterm.query}`)
  
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
