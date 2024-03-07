@@ -1,42 +1,41 @@
 'use client'
 import { useEffect, useState } from 'react';
-import Cards from "@components/Cards";
-import {Page} from '../utils/utils';
-import {Result} from '../utils/utils';
+import { Result, Searchterm, getProperties } from '../utils/utils';
+import CardHolder  from '@components/CardHolder';
+import ErrorBoundary from '@app/utils/error';
 
+interface HomeProps {
+  searchParams?: Searchterm;
+}
 
-export default function Home(
-  {
-    searchParams,
-  }: {
-    searchParams?: {
-      query?: string;
-      page?: string;
-    };
-  })  {
-  const [results, setResults] = useState<Result[]>([]);
-  const [error, setError] = useState<string | null>(null);
+export default function Home({ searchParams }: HomeProps) {
+  const [responseData, setResponseData] = useState<Result[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData() {
       try {
-        const responseData: Result[]| undefined = await Page();
-        setResults(responseData!);
+        if (searchParams && searchParams.query) {
+          const responseData: Result[] = await getProperties({ searchterm: searchParams });
+          setResponseData(responseData);
+        } else {
+          const responseData: Result[] = await getProperties({});
+          setResponseData(responseData);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
-        setError('Error fetching data. Please try again later.'); // Set error message
       }
-    };
+    }
+
     fetchData();
-  }, []);
+  }, [searchParams]); 
   return (
+    <ErrorBoundary>
     <div>
-    {error ? (
-      <div>Error: {error}</div>
-    ) : (
-      <Cards results={results} />
-    )}
-  </div>
-    
-  )
+      
+        <CardHolder results={responseData} />
+      
+    </div>
+    </ErrorBoundary>
+  );
 }
+

@@ -9,23 +9,8 @@ import { GiWashingMachine, GiPathDistance, GiRotaryPhone, GiWaterGallon, GiElect
 import { IoIosPeople } from 'react-icons/io'
 import { IoReturnDownBack } from 'react-icons/io5'
 import { BsFillPersonFill, BsWifi, BsHouseDoor, BsCurrencyDollar, BsClock, BsCashStack } from 'react-icons/bs'
-// import Map from './Map'
-// import Slider from './Slider'
-
-// import { PropertyType } from '../typings'
-// interface Props {
-//     property: PropertyType,
-//   }
 
 const PropertyDetails = () => {
-
-    // const [slider, setSlider] = useState<boolean>(false);
-
-    // const handleSlider = () => {
-    //     slider 
-    //         ? setSlider(false)
-    //         : setSlider(true);
-    // }
 
   return (
         <div className='relative flex flex-col md:flex-row w-full'>
