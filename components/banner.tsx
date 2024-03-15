@@ -8,9 +8,9 @@ export default function Banner({ placeholder }: { placeholder: string }) {
 
   return (
     <ErrorBoundary>
-    <div className="relative flex flex-col items-center bg-gray-50 text-neutral-700 bg-clip-text w-[80%] mx-auto">
+    <div className="relative flex flex-col items-center bg-white-70 text-neutral-700 bg-clip-text w-[90%] mx-auto">
       
-      <div className="flex">
+      <div className="flex bg-gray-100 ">
         <Image src={image} alt="Wilgrajo Logo" width={380} height={120} className="hidden md:block" priority />
       </div>
       <div className="text-[50px] mt-[15px]"></div>

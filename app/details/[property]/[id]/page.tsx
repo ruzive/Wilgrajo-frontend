@@ -49,16 +49,16 @@ import ErrorBoundary from '@app/utils/error';
                 <div>
                     <div className='bg-gradient-to-tr from-[#C2B9F2]/50 to-[#ACDFF2]/50 rounded-lg drop-shadow-2xl border px-5 py-10 my-[30px]'>
                         <h3 className='text-[35px] font-bold'>
-                            {results?.property_type}
+                            {/* {results?.property_type} */}
                         </h3>
                         <p className='flex font-bold'>
                             <span><HiOutlineMapPin size={20}/></span>
-                            {results?.neighborhood.title}/{results?.city.title} 
+                            {/* {results?.neighborhood.title}/{results?.city.title}  */}
                         </p>
                         <p className=' flex text-[#228B22] text-2xl mt-1.5'>
                                  <span>
                                  <GiBanknote size={40}/></span>
-                                 {Number(results?.price).toLocaleString('en-US', { style: 'currency', currency: 'ZMW' })} 
+                                 {/* {Number(results?.price).toLocaleString('en-US', { style: 'currency', currency: 'ZMW' })}  */}
                         </p>
                     </div>
                     {results?.property_type === "land" ?(

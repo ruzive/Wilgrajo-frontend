@@ -16,6 +16,12 @@ body {
   font-family: 'Comfortaa', cursive;
 }
 
+home-div {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Comfortaa', cursive;
+}
+
 
 .swiper-button-next  {
   top: 45% !important;

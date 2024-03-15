@@ -12,7 +12,7 @@ interface CardsProps {
 const Cards = ({ results }: CardsProps) => {
   return (
     <ErrorBoundary>
-    <div className="grid-cols-1 sm:grid md:grid-cols-2 ">
+    <div className="grid-cols-1 sm:grid md:grid-cols-2 mt-10">
       {results.map((result, index) => (
         <Link href={`/details/${result.property_type}/${result.id}`} key={index}>
           <div key={index} className="mx-auto">
