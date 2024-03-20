@@ -1,0 +1,17 @@
+.container{
+    /* position: fixed;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 40px; */
+    min-width: 0px;
+    padding: 10px;
+    border-radius: 25px;
+    font-weight: 500;
+  }
+
+.active{
+    /* background-color: #558b00; */
+    color:#fe3e0a;
+    font-weight: bold;
+  }
