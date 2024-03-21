@@ -15,6 +15,7 @@ interface FormData {
   message: string;
 }
 
+
 const ContactForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
@@ -23,17 +24,18 @@ const ContactForm: React.FC = () => {
     message: ''
   });
 
+  const [showSuccess, setShowSuccess] = useState(false); // State to manage success notification
    // Function to update form data on input change
    const handleInputChange = useDebouncedCallback((e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
-    console.log('name of input:', id ,'value:', value)
+    //console.log('name of input:', id ,'value:', value)
     setFormData(prevState => ({
       ...prevState,
       [id]: value
     }));
   },400)
 
-
+ 
    // Function to handle form submission
    const contactUS = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault(); // Prevent default form submission behavior
@@ -49,6 +51,13 @@ const ContactForm: React.FC = () => {
       email: '',
       message: ''
     });
+    // Show success notification
+    setShowSuccess(true);
+
+    // Hide success notification after a certain duration (e.g., 3 seconds)
+    setTimeout(() => {
+      setShowSuccess(false);
+    }, 3000);
   } catch (error) {
     // Handle errors
     console.error('Failed to submit form:', error);
@@ -59,6 +68,11 @@ const ContactForm: React.FC = () => {
     <ErrorBoundary>
     {/* <div className="grid-cols-4 sm:grid md:grid-cols-2 "> */}
     <div className="grid-cols-4 sm:grid-cols-2 2xl:grid-cols-3 grid-rows-auto gap-4 py-[10px] w-[60%] mx-auto">
+    {showSuccess && (
+          <div className="bg-green-500 text-white p-3 rounded-md">
+            Your message has been submitted successfully!
+          </div>
+        )}
       <div className="mx-3 mt-2 flex flex-col self-start rounded-lg bg-gradient-to-tr from-[#558b00]/60 to-[#fe3e0a]/60 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700 sm:shrink-0 sm:grow sm:basis-0">
         <div className="p-6">
           <section className="mb-4">
@@ -105,11 +119,14 @@ const ContactForm: React.FC = () => {
                         type="text"
                         className="peer block min-h-[auto] w-full rounded border-0 bg-blue py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                         id="name" 
-                        // value={formData.name} 
+                        defaultValue={formData.name} 
                         onChange={handleInputChange}
                         placeholder="Name" />
                       <label
-                        className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                      className={`pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary ${
+                        formData.name ? 'hidden' : '' // Hide placeholder if input has value
+                      }`}
+                        // className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
                         >Name
                       </label>
                     </div>
@@ -118,11 +135,14 @@ const ContactForm: React.FC = () => {
                         type="text"
                         className="peer block min-h-[auto] w-full rounded border-0 bg-blue py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                         id="whatsapp_number"
-                        // value={formData.number}
+                        defaultValue={formData.whatsapp_number}
                         onChange={handleInputChange} 
                         placeholder="WhatsApp Number" />
                       <label
-                        className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                        className={`pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary ${
+                          formData.whatsapp_number ? 'hidden' : '' // Hide placeholder if input has value
+                        }`}
+                        // className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
                         >WhatsApp Number
                       </label>
                     </div>
@@ -131,11 +151,14 @@ const ContactForm: React.FC = () => {
                         type="email"
                         className="peer block min-h-[auto] w-full rounded border-0 bg-blue py-[0.32rem] px-3 leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                         id="email"
-                        // value={formData.email} 
+                        defaultValue={formData.email} 
                         onChange={handleInputChange} 
                         placeholder="Email address" />
                       <label
-                        className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                        className={`pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary ${
+                          formData.email ? 'hidden' : '' // Hide placeholder if input has value
+                        }`}
+                        //className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
                         >Email address
                       </label>
                     </div>
@@ -147,7 +170,11 @@ const ContactForm: React.FC = () => {
                         onChange={handleInputChange} 
                         placeholder="Your message"></textarea>
                       <label 
-                        className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary">Message</label>
+                        className={`pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary ${
+                          formData.message ? 'hidden' : '' // Hide placeholder if input has value
+                        }`}
+                       //className="pointer-events-none absolute top-0 left-3 mb-0 max-w-[90%] origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                       >Message</label>
                     </div>                    
                     <button className="block w-full bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-3 px-6 border border-blue-500 hover:border-transparent rounded" type='submit' >Button</button>
                   </form>

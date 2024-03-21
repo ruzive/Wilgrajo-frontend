@@ -174,7 +174,7 @@ export interface ApiResponse {
 
 
 async function getData():Promise<ResponseData> {
-    const res = await fetch('http://localhost:8000/api/property/list')
+    const res = await fetch(`https://real-estate-wilgrajo.onrender.com/api/property/list`)
    
     if (!res.ok) {
       // This will activate the closest `error.js` Error Boundary
@@ -197,7 +197,7 @@ export async function Page() {
 }
 
 async function getAProperty({ params }: { params: Params }): Promise<ApiResponse> {
-  const url = `http://localhost:8000/api/${params.property}/${params.id}`;
+  const url = `https://real-estate-wilgrajo.onrender.com/api/${params.property}/${params.id}`;
   try {
     const res = await fetch(url, { method: 'GET' });
     if (!res.ok) {
@@ -223,7 +223,7 @@ export async function fetchData({ params }: { params: Params }): Promise<DataAtt
 
 export const postFormData = async (formData: FormData): Promise<any> => {
   try {
-    const response = await fetch('http://localhost:8000/api/contact/', {
+    const response = await fetch('https://real-estate-wilgrajo.onrender.com/api/contact/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json', // Assuming you're sending JSON data
@@ -248,7 +248,8 @@ export const postFormData = async (formData: FormData): Promise<any> => {
 };
 
 async function getfilteredPropertyListData(searchterm: Searchterm):Promise<ResponseData> {
-  const res = await fetch(`http://localhost:8000/api/properties/?filter%5Bsearch%5D${searchterm.query}`)
+
+  const res = await fetch(`https://real-estate-wilgrajo.onrender.com/api/properties/?filter%5Bsearch%5D${searchterm.query}`)
  
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
