@@ -1,5 +1,5 @@
 'use client';
-import bgImage from '@public/assets/images/zimindo_plaza.jpeg';
+// import bgImage from '@public/assets/images/zimindo_plaza.jpeg';
 import Image from 'next/image';
 import { FaWhatsapp } from 'react-icons/fa6';
 import React, { useState, ChangeEvent, FormEvent } from 'react'; // Import useState hook and types
@@ -79,7 +79,7 @@ const ContactForm: React.FC = () => {
             <div className="relative h-[300px] overflow-hidden bg-cover bg-[50%] bg-no-repeat ">
               <Image 
                 alt='background-contact' 
-                src={bgImage} 
+                src='/public/assets/images/zimindo_plaza.jpeg' 
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 priority 
