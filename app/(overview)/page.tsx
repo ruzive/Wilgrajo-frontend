@@ -30,11 +30,9 @@ export default function Home({ searchParams }: HomeProps) {
   }, [searchParams]); 
   return (
     <ErrorBoundary>
-    <div>
-      
-        <CardHolder results={responseData} />
-      
-    </div>
+              <div>
+                  <CardHolder results={responseData} />
+              </div>
     </ErrorBoundary>
   );
 }

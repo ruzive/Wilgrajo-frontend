@@ -6,15 +6,16 @@ import { usePathname } from "next/navigation"
 import clsx from 'clsx';
 import ErrorBoundary from "@app/utils/error";
 
-const NavLink = ({ item }) => {
+interface NavigationItem {
+  path: string;
+  title: string;
+}
+const NavLink = ({ item }: { item: NavigationItem }) => {
     const pathName = usePathname()
   return (
     <ErrorBoundary>
         <Link 
             href={item.path} 
-            // className={`${styles.container} ${
-            //     pathName === item.path && styles.active
-            //     }`}
             className={clsx({
                 [styles.container]:true ,
                 [styles.active]: pathName === item.path}
