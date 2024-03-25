@@ -79,7 +79,7 @@ const ContactForm: React.FC = () => {
             <div className="relative h-[300px] overflow-hidden bg-cover bg-[50%] bg-no-repeat ">
               <Image 
                 alt='background-contact' 
-                src='/public/assets/images/zimindo_plaza.jpeg' 
+                src={bgImage} 
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 priority 
